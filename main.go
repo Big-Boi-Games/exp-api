@@ -3,6 +3,7 @@ package main
 import (
 	Db "exp-api/database"
 	Mid "exp-api/middleware"
+	Routes "exp-api/routes"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -21,11 +22,7 @@ func main() {
 	user := router.Group("/user")
 	user.Use(Mid.AuthHandler())
 	{
-		user.GET("/status", func(c *gin.Context) {
-			c.JSON(200, gin.H{
-				"Status": "Bingus.",
-			})
-		})
+		Routes.Users(user)
 	}
 
 	Db.InitDatabase()
